@@ -5,6 +5,9 @@
 #include <string>
 #include <cctype>
 #include <algorithm>
+#include <fstream>
+#include <sstream>
+#include <iostream>
 
 using namespace std;
 
@@ -123,9 +126,81 @@ void spellCheckHandler(const string& inputText, const unordered_set<string>& dic
 }
 
 int main() {
-    // Example usage
-    std::unordered_set<std::string> dictionary = {"hello", "world", "how", "are", "you", "neighbor", "today", "document", "word", "i", "am", "fine", "labor", "this", "just", "to", "see", "hope", "having", "a", "good", "day", "the", "weather", "weekend", "will", "be", "fabulous", "we", "spell", "check"};
-    std::string inputText = "hello worl, how are you. We will spelll check this docuemnt just to see. I hope you are having a good day. The weather this weekend will be flabulous.";
-    spellCheckHandler(inputText, dictionary);
+
+    int choice;
+    string fileName;
+    std::unordered_set<string> dictionary;
+
+    std::ifstream inFile("dictionary.txt");
+    if (!inFile) {
+        std::cerr << "Unable to open file dictionary.txt";
+        return 1; // return with error
+    }
+    while(inFile) {
+        string word;
+        inFile >> word;
+        dictionary.insert(word);
+    }
+
+    do{
+        std::cout << "Please choose an option:" << endl;
+        std::cout << "1. Open a file;" << endl;
+        std::cout << "2. Save a file" << endl;
+        std::cout << "3. Spell check a file" << endl;
+        std::cout << "4. Exit" << endl;
+
+        cin >> choice;  
+        cin.ignore();  
+
+        switch(choice){
+            case 1:
+                std::cout << "Please input the file name to open: ";
+                std::getline(cin, fileName);
+                if(fileName.empty()){
+                    std::cout << "No file opened. Please open a file first." << endl;
+                }
+                else if(fileName == "back" || fileName == "Back"){
+                continue;
+                }
+                else{
+                    open(fileName);
+                }
+                break;
+                
+            case 2:
+                std::cout << "Please input the file name to save: ";
+                std::getline(cin, fileName);
+                if(fileName.empty()){
+                    std::cout << "No file opened. Please open a file first." << endl;
+                }
+                else if(fileName == "back" || fileName == "Back"){
+                    break;
+                }
+                else{
+                    save(fileName);
+                }
+                break;
+            case 3:
+                std::cout << "Please input the file name to spell check: ";
+                std::getline(cin, fileName);
+                if(fileName.empty()){
+                    std::cout << "No file opened. Please open a file first." << endl;
+                }
+                else if(fileName == "back" || fileName == "Back"){
+                    break;
+                }
+                else{
+                    spellCheckHandler(fileName, dictionary);
+                }
+                break;
+            case 4:
+                std::cout << "Exiting the program." << endl;
+                break;
+            default:
+                std::cout << "Invalid choice. Please try again." << endl;
+        }
+
+    }while(choice != 4);
+
     return 0;
 }
