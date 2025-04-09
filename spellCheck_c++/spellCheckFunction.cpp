@@ -144,7 +144,7 @@ int main() {
 
     do{
         std::cout << "Please choose an option:" << endl;
-        std::cout << "1. Open a file;" << endl;
+        std::cout << "1. Open a file" << endl;
         std::cout << "2. Save a file" << endl;
         std::cout << "3. Spell check a file" << endl;
         std::cout << "4. Exit" << endl;
@@ -157,7 +157,7 @@ int main() {
                 std::cout << "Please input the file name to open: ";
                 std::getline(cin, fileName);
                 if(fileName.empty()){
-                    std::cout << "No file opened. Please open a file first." << endl;
+                    std::cout << "Error: No file selected" << endl;
                 }
                 else if(fileName == "back" || fileName == "Back"){
                 continue;
@@ -171,7 +171,7 @@ int main() {
                 std::cout << "Please input the file name to save: ";
                 std::getline(cin, fileName);
                 if(fileName.empty()){
-                    std::cout << "No file opened. Please open a file first." << endl;
+                    std::cout << "Error: No file selected" << endl;
                 }
                 else if(fileName == "back" || fileName == "Back"){
                     break;
@@ -184,7 +184,7 @@ int main() {
                 std::cout << "Please input the file name to spell check: ";
                 std::getline(cin, fileName);
                 if(fileName.empty()){
-                    std::cout << "No file opened. Please open a file first." << endl;
+                    std::cout << "Error: No file entered" << endl;
                 }
                 else if(fileName == "back" || fileName == "Back"){
                     break;
