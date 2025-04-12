@@ -11,6 +11,17 @@
 
 using namespace std;
 
+// reads the content of a file
+string readFile(const string& filename) {
+    ifstream inFile(filename);
+    stringstream buffer;
+
+    buffer << inFile.rdbuf();
+    inFile.close();
+
+    return buffer.str();
+}
+
 void spellCheckHandler(const string& inputText, const unordered_set<string>& dictionary) {
     // Convert input text to lowercase for easier use
     string lowerInput = inputText;
@@ -46,23 +57,7 @@ void spellCheckHandler(const string& inputText, const unordered_set<string>& dic
 
     // middle row of keyboard
     adjacentKeys['a'] = {'s'}; 
-    adjacentKeys['s'] = {'a', 'd'}; 
-    adjacentKeys['d'] = {'s', 'f'};
-    adjacentKeys['f'] = {'d', 'g'};
-    adjacentKeys['g'] = {'f', 'h'}; 
-    adjacentKeys['h'] = {'g', 'j'};
-    adjacentKeys['j'] = {'h', 'k'}; 
-    adjacentKeys['k'] = {'j', 'l'}; 
-    adjacentKeys['l'] = {'k'};
-    
-    // bottom row of keyboard
-    adjacentKeys['z'] = {'x'}; 
-    adjacentKeys['x'] = {'z', 'c'}; 
-    adjacentKeys['c'] = {'x', 'v'}; 
-    adjacentKeys['v'] = {'c', 'b'}; 
-    adjacentKeys['b'] = {'v', 'n'}; 
-    adjacentKeys['n'] = {'b', 'm'};
-    adjacentKeys['m'] = {'n'};
+   
     
 
 
@@ -125,13 +120,46 @@ void spellCheckHandler(const string& inputText, const unordered_set<string>& dic
     }
 }
 
+//opens the file and prints to cl
+void open(const string& filename) {
+    ifstream inFile(filename);
+    string line;
+    string content;
+
+    if (!inFile) {
+        cerr << "Could not open file " << filename << endl;
+        return;
+    }
+
+    while (getline(inFile, line)) {
+        cout << line << endl;
+    }
+    
+    inFile.close();
+}
+
+// not done
+void save(const string& filename) {
+    ofstream outFile(filename);
+    string line;
+
+    if (!outFile) {
+        cerr << "Could not write to file " << filename << endl;
+        return;
+    }
+
+    outFile << line;
+    cout << "File saved" << endl;
+    outFile.close();
+}
+
 int main() {
 
     int choice;
     string fileName;
     std::unordered_set<string> dictionary;
 
-    std::ifstream inFile("dictionary.txt");
+    std::ifstream inFile("../dictionary.txt");
     if (!inFile) {
         std::cerr << "Unable to open file dictionary.txt";
         return 1; // return with error
@@ -190,7 +218,8 @@ int main() {
                     break;
                 }
                 else{
-                    spellCheckHandler(fileName, dictionary);
+                    string content = readFile(fileName);
+                    spellCheckHandler(content, dictionary);
                 }
                 break;
             case 4:
