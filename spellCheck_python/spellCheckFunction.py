@@ -13,11 +13,10 @@ def main():
     
     choice = None
 
-    while choice != "4":
+    while choice != "3":
         print("1. Open a file")
-        print("2. Save a file")
-        print("3. Spell check a file")
-        print("4. Exit")
+        print("2. Spell check a file")
+        print("3. Exit")
         choice = input("Enter your choice: ")
 
         if choice == "1":
@@ -30,15 +29,6 @@ def main():
                 open(fileName)
 
         elif choice == "2":
-            fileName = input("Enter a file to save: ")
-            if not fileName:
-                print("Error: No file selected")
-            elif fileName.lower() == "back":
-                continue
-            else:
-                save(fileName)
-
-        elif choice == "3":
             fileName = input("Enter a file to spell check: ")
             if not fileName:
                 print("Error: No file selected")
@@ -46,7 +36,7 @@ def main():
                 continue
             else:
                 spellCheckHandler(fileName, dictionary)
-        elif choice == "4":
+        elif choice == "3":
             print("Exiting...")
         else:
             print("Invalid choice. Please try again.")

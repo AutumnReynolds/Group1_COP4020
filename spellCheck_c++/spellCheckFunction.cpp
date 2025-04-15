@@ -138,21 +138,6 @@ void open(const string& filename) {
     inFile.close();
 }
 
-// not done
-void save(const string& filename) {
-    ofstream outFile(filename);
-    string line;
-
-    if (!outFile) {
-        cerr << "Could not write to file " << filename << endl;
-        return;
-    }
-
-    outFile << line;
-    cout << "File saved" << endl;
-    outFile.close();
-}
-
 int main() {
 
     int choice;
@@ -173,9 +158,8 @@ int main() {
     do{
         std::cout << "Please choose an option:" << endl;
         std::cout << "1. Open a file" << endl;
-        std::cout << "2. Save a file" << endl;
-        std::cout << "3. Spell check a file" << endl;
-        std::cout << "4. Exit" << endl;
+        std::cout << "2. Spell check a file" << endl;
+        std::cout << "3. Exit" << endl;
 
         cin >> choice;  
         cin.ignore();  
@@ -196,19 +180,6 @@ int main() {
                 break;
                 
             case 2:
-                std::cout << "Please input the file name to save: ";
-                std::getline(cin, fileName);
-                if(fileName.empty()){
-                    std::cout << "Error: No file selected" << endl;
-                }
-                else if(fileName == "back" || fileName == "Back"){
-                    break;
-                }
-                else{
-                    save(fileName);
-                }
-                break;
-            case 3:
                 std::cout << "Please input the file name to spell check: ";
                 std::getline(cin, fileName);
                 if(fileName.empty()){
@@ -222,14 +193,14 @@ int main() {
                     spellCheckHandler(content, dictionary);
                 }
                 break;
-            case 4:
+            case 3:
                 std::cout << "Exiting the program." << endl;
                 break;
             default:
                 std::cout << "Invalid choice. Please try again." << endl;
         }
 
-    }while(choice != 4);
+    }while(choice != 3);
 
     return 0;
 }
