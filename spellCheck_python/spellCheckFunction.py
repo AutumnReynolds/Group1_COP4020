@@ -4,7 +4,7 @@ def main():
     dictionary = set()
 
     try:
-        with open("spellCheck_python/dictionary.txt", "r") as f:
+        with open("dictionary.txt", "r") as f:
             for line in f:
                 dictionary.add(line.strip())
     except FileNotFoundError:
@@ -74,36 +74,36 @@ def spellCheckHandler(fileName: str, dictionary: set[str]):
     # Adjacent keys mapping (QWERTY)
     adjacent_keys = {
         # Top row of keyboard
-        'q': ['w'], 
-        'w': ['q', 'e'], 
-        'e': ['w', 'r'], 
-        'r': ['e', 't'], 
-        't': ['r', 'y'],
-        'y': ['t', 'u'], 
-        'u': ['y', 'i'], 
-        'i': ['u', 'o'], 
-        'o': ['i', 'p'], 
-        'p': ['o'],
+        'q': ['w', 'a'], 
+        'w': ['q', 'e', 'a', 's'], 
+        'e': ['w', 'r', 'd', 's'], 
+        'r': ['e', 't', 'f', 'd'], 
+        't': ['r', 'y', 'g', 'f'],
+        'y': ['t', 'u', 'h', 'g'], 
+        'u': ['y', 'i', 'j', 'h'], 
+        'i': ['u', 'o', 'k', 'j'], 
+        'o': ['i', 'p', 'l', 'k'], 
+        'p': ['o', 'l'],
 
         # Middle row of keyboard
-        'a': ['s'], 
-        's': ['a', 'd'], 
-        'd': ['s', 'f'], 
-        'f': ['d', 'g'], 
-        'g': ['f', 'h'],
-        'h': ['g', 'j'], 
-        'j': ['h', 'k'], 
-        'k': ['j', 'l'], 
-        'l': ['k'],
+        'a': ['s', 'q', 'z', 'w'], 
+        's': ['a', 'd', 'e', 'w', 'z', 'x'], 
+        'd': ['s', 'f', 'r', 'e', 'x', 'c'], 
+        'f': ['d', 'g', 't', 'r', 'c', 'v'], 
+        'g': ['f', 'h', 'y', 't', 'v', 'b'],
+        'h': ['g', 'j', 'u', 'y', 'b', 'n'], 
+        'j': ['h', 'k', 'i', 'u', 'n', 'm'], 
+        'k': ['j', 'l', 'o', 'i', 'm'], 
+        'l': ['k', 'o', 'p'],
 
         # Bottom row of keyboard
-        'z': ['x'], 
-        'x': ['z', 'c'], 
-        'c': ['x', 'v'], 
-        'v': ['c', 'b'],
-        'b': ['v', 'n'], 
-        'n': ['b', 'm'], 
-        'm': ['n']
+        'z': ['a', 's', 'x'], 
+        'x': ['z', 's', 'd', 'c'], 
+        'c': ['x', 'd', 'f', 'v'], 
+        'v': ['c', 'f', 'g', 'b'],
+        'b': ['v', 'g', 'h', 'n'], 
+        'n': ['b', 'h', 'j', 'm'], 
+        'm': ['n', 'j', 'k']
     }
 
     for word in words:

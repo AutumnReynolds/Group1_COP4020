@@ -43,24 +43,40 @@ void spellCheckHandler(const string& inputText, const unordered_set<string>& dic
 
     // Adjacent keys for U.S. keyboard
     unordered_map<char, std::vector<char> > adjacentKeys;
+    
     // top row of keyboard
-    adjacentKeys['q'] = {'w'}; 
-    adjacentKeys['w'] = {'q', 'e'};
-    adjacentKeys['e'] = {'w', 'r'};
-    adjacentKeys['r'] = {'e', 't'};
-    adjacentKeys['t'] = {'r', 'y'};
-    adjacentKeys['y'] = {'t', 'u'};
-    adjacentKeys['u'] = {'y', 'i'};
-    adjacentKeys['i'] = {'u', 'o'};
-    adjacentKeys['o'] = {'i', 'p'}; 
-    adjacentKeys['p'] = {'o'};
+    adjacentKeys['q'] = {'w', 'a'}; 
+    adjacentKeys['w'] = {'q', 'e', 'a', 's'};
+    adjacentKeys['e'] = {'w', 'r', 'd', 's'};
+    adjacentKeys['r'] = {'e', 't', 'f', 'd'};
+    adjacentKeys['t'] = {'r', 'y', 'g', 'f'};
+    adjacentKeys['y'] = {'t', 'u', 'h', 'g'};
+    adjacentKeys['u'] = {'y', 'i', 'j', 'h'};
+    adjacentKeys['i'] = {'u', 'o', 'k', 'j'};
+    adjacentKeys['o'] = {'i', 'p', 'l', 'k'}; 
+    adjacentKeys['p'] = {'o', 'l'};
 
     // middle row of keyboard
-    adjacentKeys['a'] = {'s'}; 
+    adjacentKeys['a'] = {'s', 'q', 'z', 'w'};
+    adjacentKeys['s'] = {'a', 'd', 'e', 'w', 'z', 'x'};
+    adjacentKeys['d'] = {'s', 'f', 'r', 'e', 'x', 'c'};
+    adjacentKeys['f'] = {'d', 'g', 't', 'r', 'c', 'v'};
+    adjacentKeys['g'] = {'f', 'h', 'y', 't', 'v', 'b'};
+    adjacentKeys['h'] = {'g', 'j', 'u', 'y', 'b', 'n'};
+    adjacentKeys['j'] = {'h', 'k', 'i', 'u', 'n', 'm'};
+    adjacentKeys['k'] = {'j', 'l', 'o', 'i', 'm'};
+    adjacentKeys['l'] = {'k', 'o', 'p'};
+
+    // bottom row of keyboard
+    adjacentKeys['z'] = {'a', 's', 'x'};
+    adjacentKeys['x'] = {'z', 's', 'd', 'c'};
+    adjacentKeys['c'] = {'x', 'd', 'f', 'v'};
+    adjacentKeys['v'] = {'c', 'f', 'g', 'b'};
+    adjacentKeys['b'] = {'v', 'g', 'h', 'n'};
+    adjacentKeys['n'] = {'b', 'h', 'j', 'm'};
+    adjacentKeys['m'] = {'n', 'j', 'k'};
    
-    
-
-
+    // check each word against the dictionary
     for (const auto& word : words) {
         if (!dictionary.count(word)) {
             std::unordered_set<std::string> misspelledWords;
@@ -144,7 +160,7 @@ int main() {
     string fileName;
     std::unordered_set<string> dictionary;
 
-    std::ifstream inFile("../dictionary.txt");
+    std::ifstream inFile("dictionary.txt");
     if (!inFile) {
         std::cerr << "Unable to open file dictionary.txt";
         return 1; // return with error
